@@ -1,5 +1,6 @@
 import React from 'react';
 import picture from '../assets/2m.png';
+import steamIcon from '../assets/steam_light.png';
 
 const Navbar = () => {
   // Define the function outside of the return statement
@@ -15,9 +16,14 @@ const Navbar = () => {
       {/* Sign in button on the right */}
       <button 
         onClick={handleSignIn}
-        className="bg-black w-30 h-10 text-white rounded-lg"
+        className="bg-black w-30 h-10 text-white rounded-lg flex items-center justify-center gap-2"
       >
         Sign in
+        <img 
+          src={steamIcon} 
+          alt="Steam icon"
+          className="w-5 h-5"
+        />
       </button>
     </div>
   );
