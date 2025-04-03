@@ -1,33 +1,53 @@
-import { useState, useCallback } from 'react';
-import { IoLink } from "react-icons/io5";;
+import { useState } from 'react';
+import { IoLink } from "react-icons/io5";
 import { FaArrowAltCircleUp } from 'react-icons/fa';
 
-const Chatbox = () => {
+const Chatbox = ({ onSubmit, isSubmitted }) => {
   const [inputValue, setInputValue] = useState("");
 
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      if (inputValue.trim()) {
+        onSubmit(inputValue.trim());
+        setInputValue("");
+      }
+    }
+  };
+
+  const iconSize = isSubmitted ? 20 : 24;
+  const buttonPadding = isSubmitted ? 'p-1.5' : 'p-2';
+  const textAreaPadding = isSubmitted ? 'pt-1.5 px-1.5' : 'p-2';
+  const placeholderText = isSubmitted ? "Ask follow-up..." : "How can I help assist your schedule?";
+
   return (
-    <div className="flex justify-center w-[800px] h-[150px] rounded-2xl mt-15 ml-78 bg-[#D3D8DC] flex flex-col p-4">
-      {/* Scrollable Input Container */}
-      <div className="flex-1 overflow-y-auto max-h-[100px]">
+    <div className={`flex justify-center rounded-2xl bg-[#D3D8DC] flex-col transition-all duration-1000 ${isSubmitted ? 'w-full h-[72px] p-2.5' : 'w-full max-w-3xl h-[150px] p-4'}`}>
+      <div className={`${isSubmitted ? 'h-[34px]' : 'flex-1 max-h-[100px]'}`}>
         <textarea
-          placeholder="Ask anything about counter-strike..."
+          placeholder={placeholderText}
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
-          className="w-full min-h-[200px] relative -top-1 border-none outline-none text-gray-700 placeholder-gray-500 bg-[#D3D8DC] rounded-lg p-2 resize-none"
+          onKeyPress={handleKeyPress}
+          className={`w-full h-full border-none outline-none text-gray-700 placeholder-gray-500 bg-[#D3D8DC] rounded-lg resize-none leading-tight ${textAreaPadding} ${isSubmitted ? 'text-sm' : ''}`}
+          rows={1}
         />
       </div>
 
-      {/* Action Buttons */}
-      <div className="flex gap-2 justify-end relative -bottom-[8px]">
-        {/* link button*/}
-        <button className="p-2 rounded-full bg-gray-300 hover:bg-[#c8cbcb] relative -left-170
-        ">
-          <IoLink className="text-gray-700" size={24} /> {/* Mic Icon */}
+      <div className="flex gap-2 justify-between items-center mt-auto mb-0.5">
+        <button className={`${buttonPadding} rounded-full bg-gray-300 hover:bg-[#c8cbcb]`}>
+          <IoLink className="text-gray-700" size={iconSize} />
         </button>
 
-        {/* enter button */}
-        <button className="p-2 rounded-full bg-gray-300 hover:bg-[#c8cbcb]">
-          <FaArrowAltCircleUp className="text-gray-700" size={24}  /> {/* Settings Icon */}
+        <button 
+          className={`${buttonPadding} rounded-full bg-gray-300 hover:bg-[#c8cbcb]`}
+          onClick={() => {
+            if (inputValue.trim()) {
+              onSubmit(inputValue.trim());
+              setInputValue("");
+            }
+          }}
+        >
+          <FaArrowAltCircleUp className="text-gray-700" size={iconSize} />
         </button>
       </div>
     </div>

@@ -9,16 +9,16 @@ const Navbar = () => {
   }
 
   return (
-    <div className="flex justify-between p-4">
+    <div className="flex justify-between items-center p-4 w-full">
       {/* Logo on the left */}
       <img src={picture} alt="2m" className="w-14" />
 
       {/* Sign in button on the right */}
       <button 
         onClick={handleSignIn}
-        className="bg-black w-30 h-10 text-white rounded-lg flex items-center justify-center gap-2"
+        className="bg-black h-10 text-white rounded-lg flex items-center gap-2 px-4"
       >
-        Sign in
+        <span>Sign in</span>
         <img 
           src={steamIcon} 
           alt="Steam icon"
