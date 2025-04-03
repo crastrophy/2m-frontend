@@ -18,7 +18,7 @@ const Chatbox = ({ onSubmit, isSubmitted }) => {
   const iconSize = isSubmitted ? 20 : 24;
   const buttonPadding = isSubmitted ? 'p-1.5' : 'p-2';
   const textAreaPadding = isSubmitted ? 'pt-1.5 px-1.5' : 'p-2';
-  const placeholderText = isSubmitted ? "Ask follow-up..." : "How can I help assist your schedule?";
+  const placeholderText = isSubmitted ? "Ask follow-up..." : "Ask anything about Counter-Strike 2...";
 
   return (
     <div className={`flex justify-center rounded-2xl bg-[#D3D8DC] flex-col transition-all duration-1000 ${isSubmitted ? 'w-full h-[72px] p-2.5' : 'w-full max-w-3xl h-[150px] p-4'}`}>
